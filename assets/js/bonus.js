@@ -73,7 +73,7 @@ function renderCircles(circlesGroup, newYScale, chosenYAxis) {
 }
 
 //update circles group
-var circlesGroup = function updateToolTip(chosenXAxis, chosenYAxis) {
+function updateToolTip(chosenXAxis, circlesGroup) {
     var xLabel;
     if (chosenXAxis === "age") {
         xLabel = "Age (median)";
@@ -325,7 +325,7 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
         .attr("fill", "white")
         .attr("text-anchor", "middle");
 
-    var toolTip = d3.updateToolTip(chosenXAxis, circlesGroup)
+    updateToolTip(chosenXAxis, chosenYAxis)
         .attr("class", "tooltip")
         .offset([80. -60])
         .html(function(d) {

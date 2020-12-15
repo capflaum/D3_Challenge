@@ -98,7 +98,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 
     var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([80. -60])
+        .offset([80, -60])
         .html(function(d) {
             return (`<b>${d.abbr}<br>${xLabel}: ${d[chosenXAxis]}<br>${yLabel}: ${d[chosenYAxis]}`);
         });
@@ -325,7 +325,7 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
         .attr("fill", "white")
         .attr("text-anchor", "middle");
 
-    updateToolTip(chosenXAxis, chosenYAxis)
+    updateToolTip(chosenXAxis, circlesGroup)
         .attr("class", "tooltip")
         .offset([80. -60])
         .html(function(d) {

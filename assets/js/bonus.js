@@ -52,10 +52,10 @@ function renderAxes(newXScale, xAxis) {
 
 function renderAxes(newYScale, yAxis){
     var leftAxis = d3.axisLeft(newYScale);
-
     yAxis.transition()
-    .duration(1000)
-    .call(leftAxis);
+        .duration(1000)
+        .call(leftAxis);
+    return yAxis
 }
 
 // update circles group with transition
@@ -250,15 +250,15 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
                         .classed("inactive", false);
                 }
                 else {
-                povertyLabel
-                    .classed("active", true)
-                    .classed("inactive", false);
-                ageLabel
-                    .classed("active", false)
-                    .classed("inactive", true);
-                incomeLabel
-                    .classed("active", false)
-                    .classed("inactive", true);
+                    povertyLabel
+                        .classed("active", true)
+                        .classed("inactive", false);
+                    ageLabel
+                        .classed("active", false)
+                        .classed("inactive", true);
+                    incomeLabel
+                        .classed("active", false)
+                        .classed("inactive", true);
                 }
             }
         })
@@ -273,7 +273,7 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
 
                 circlesGroup = renderCircles(circlesGroup, yLinearScale, chosenYAxis);
                 
-                circlesGroup = updateToolTip(chosenXAxis, chosenYAxis);
+                circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
                 if (chosenYAxis === "smokes"){
                     obesityLabel
                         .classed("active", false)
@@ -325,9 +325,9 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
         .attr("fill", "white")
         .attr("text-anchor", "middle");
 
-    updateToolTip(chosenXAxis, circlesGroup)
+    var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([80. -60])
+        .offset([80, -60])
         .html(function(d) {
             return (`<b>${d.abbr}<br>${xLabel}: ${d[chosenXAxis]}<br>${yLabel}: ${d[chosenYAxis]}`);
         });

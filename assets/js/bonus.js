@@ -43,7 +43,7 @@ function yScale(stateData, chosenYAxis){
 }
 
 // updating axis with transition
-function renderAxes(newXScale, xAxis) {
+function renderXAxes(newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newXScale);
 
     xAxis.transition()
@@ -52,7 +52,7 @@ function renderAxes(newXScale, xAxis) {
     return xAxis;
 }
 
-function renderAxes(newYScale, yAxis){
+function renderYAxes(newYScale, yAxis){
     var leftAxis = d3.axisLeft(newYScale);
     yAxis.transition()
         .duration(1000)
@@ -75,27 +75,26 @@ function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
 }
 
 //update circles group
-function updateToolTip(chosenXAxis, circlesGroup) {
-    var xLabel;
+function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
+
     if (chosenXAxis === "age") {
-        xLabel = "Age (median)";
+        var xLabel = "Age (median)";
     }
     else if (chosenXAxis === "income") {
-        xLabel = "Household Income";
+        var xLabel = "Household Income";
     }
     else {
-        xLabel ="% in Poverty";
+        var xLabel ="% in Poverty";
     }
 
-    var yLabel;
     if (chosenYAxis === "smokes") {
-        yLabel = "Smoking Rate";
+        var yLabel = "Smoking Rate";
     }
     else if (chosenYAxis === "healthcare") {
-        yLabel = "% with Healthcare";
+        var yLabel = "% with Healthcare";
     }
     else {
-        yLabel ="Obesity Rate";
+        var yLabel ="Obesity Rate";
     }
 
     var toolTip = d3.tip()
@@ -118,7 +117,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 }
 
 //Read the data
-d3.csv("assets/data/data.csv").then(function(stateData, err) {
+d3.csv("assets/data/data.csv").then(function(err, stateData) {
     if(err) throw err;
     console.log(stateData);
     stateData.forEach(function(data) {

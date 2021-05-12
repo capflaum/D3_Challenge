@@ -29,13 +29,15 @@ var chosenYAxis = "obesity"
 //updating axis scale(size) with axis click
 function xScale(stateData, chosenXAxis) {
     var xLinearScale = d3.scaleLinear()
-        .domain([5,25])
+        .domain([d3.min(stateData, d => d[chosenXAxis]) * 0.9, d3.max(stateData, d => d[chosenXAxis]) * 1.2
+        ])
         .range([0, width]);
     return xLinearScale;
 }
 function yScale(stateData, chosenYAxis){
     var yLinearScale = d3.scaleLinear()
-        .domain([5, d3.max(stateData, d => d.obesity)])
+        .domain([5, d3.max(stateData, d => d[chosenYAxis]) * 0.5, d3.max(stateData, d => d[chosenYAxis]) * 1.2
+        ])
         .range([height, 0]);
     return yLinearScale;
 }
@@ -59,13 +61,13 @@ function renderAxes(newYScale, yAxis){
 }
 
 // update circles group with transition
-function renderCircles(circlesGroup, newXScale, chosenXAxis) {
+function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
     circlesGroup.transition()
         .duration(1000)
         .attr("cx", d => newXScale(d[chosenXAxis]));
     return circlesGroup;
 }
-function renderCircles(circlesGroup, newYScale, chosenYAxis) {
+function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
     circlesGroup.transition()
         .duration(1000)
         .attr("cy", d => newXScale(d[chosenYAxis]));

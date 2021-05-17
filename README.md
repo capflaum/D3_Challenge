@@ -13,7 +13,7 @@ The data set included with the assignment is based on 2014 ACS 1-year estimates 
 
 ### Core Assignment: D3 
 
-Scatter plot between two of the data variables: 'Poverty vs. Obesity'.
+Scatter plot between two of the data variables: 'Poverty vs. Obesity'. Circles include mouseover tooltip with 'State' name, 'Poverty Rate', and 'Obesity Rate' per state. 
 
 Accesible through assets/js/app.js
 

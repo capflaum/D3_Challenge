@@ -36,7 +36,7 @@ function xScale(stateData, chosenXAxis) {
 }
 function yScale(stateData, chosenYAxis){
     var yLinearScale = d3.scaleLinear()
-        .domain([5, d3.max(stateData, d => d[chosenYAxis]) * 0.5, d3.max(stateData, d => d[chosenYAxis]) * 1.2
+        .domain([d3.min(stateData, d => d[chosenYAxis]) * 0.5, d3.max(stateData, d => d[chosenYAxis]) * 1.2
         ])
         .range([height, 0]);
     return yLinearScale;
@@ -154,37 +154,37 @@ d3.csv("assets/data/data.csv").then(function(err, stateData) {
         .data(stateData)
         .enter()
         .append("circle")
-        .attr("cx", d => x(d[chosenXAxis]))
-        .attr("cy", d => y(d[chosenYAxis]))
-        .attr("r", 10)
+        .attr("cx", d => xLinearScale(d[chosenXAxis]))
+        .attr("cy", d => yLinearScale(d[chosenYAxis]))
+        .attr("r", 20)
         .attr("fill", "blue")
         .attr("stroke", "black")
         .attr("opacity", "0.5");
     
     // create multiple axis labels
     var xLabelsGroup = chartGroup.append("g")
-        .attr("transform", `translate(${width / 2}, ${height + 30})`);
+        .attr("transform", `translate(${width / 2}, ${height + 20})`);
     
         // multiple x labels
     var povertyLabel = xLabelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 20)
         .attr("value", "poverty")
-        .attr("active", true)
+        .classed("active", true)
         .attr("class", "axisText")
         .text("% In Poverty");
     var ageLabel = xLabelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 40)
         .attr("value", "age")
-        .attr("inactive", true)
+        .classed("inactive", true)
         .attr("class", "axisText")
         .text("Age (median)");
     var incomeLabel = xLabelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 60)
         .attr("value", "income")
-        .attr("inactive", true)
+        .classed("inactive", true)
         .attr("class", "axisText")
         .text("Household Income");
     
@@ -196,7 +196,7 @@ d3.csv("assets/data/data.csv").then(function(err, stateData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("value", "obesity")
-        .attr("active", true)
+        .classed("active", true)
         .attr("class", "axisText")
         .text("Obesity Rate");
     var smokesLabel = yLabelsGroup.append("text")
@@ -204,7 +204,7 @@ d3.csv("assets/data/data.csv").then(function(err, stateData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("value", "smokes")
-        .attr("inactive", true)
+        .classed("inactive", true)
         .attr("class", "axisText")
         .text("Smoking Rate");
     var healthcareLabel = yLabelsGroup.append("text")
@@ -212,7 +212,7 @@ d3.csv("assets/data/data.csv").then(function(err, stateData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("value", "healthcare")
-        .attr("inactive", true)
+        .classed("inactive", true)
         .attr("class", "axisText")
         .text("% with Healthcare");
 

@@ -13,7 +13,9 @@ The data set included with the assignment is based on 2014 ACS 1-year estimates 
 
 ### Core Assignment: D3 
 
-Scatter plot between two of the data variables such as `Healthcare vs. Poverty` or `Smokers vs. Age`.
+Scatter plot between two of the data variables: 'Poverty vs. Obesity'.
+
+Accesible through assets/js/app.js
 
 ![image](https://user-images.githubusercontent.com/69134400/118566021-09726980-b728-11eb-9f49-e17bf1295991.png)
 
@@ -22,6 +24,8 @@ Scatter plot between two of the data variables such as `Healthcare vs. Poverty` 
 ### Bonus:  
 
 Interactive D3 scatter plot
+
+Accesible through assets/js/bonus.js
 
 ![7-animated-scatter](Images/7-animated-scatter.gif)
 
